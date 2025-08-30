@@ -4,543 +4,893 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seminars of Analysis and Geometric Measure Theory</title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            line-height: 1.6;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #e6f3ff, #b3d9ff); /* Light blue gradient background */
-            min-height: 100vh;
-        }
-        .wrapper {
-            display: flex;
-        }
-        /* Sidebar Navigation */
-        .sidebar {
-            width: 200px;
-            background: linear-gradient(to bottom, #e6f3ff, #b3d9ff); /* Match body gradient */
-            position: fixed;
-            height: 100vh;
-            padding-top: 20px;
-            overflow-y: auto;
-            border-right: 1px solid #a3c9ff; /* Subtle separator */
-        }
-        .sidebar h2 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-        }
-        .sidebar ul {
-            list-style: none;
             padding: 0;
         }
-        .sidebar li {
-            margin: 10px 0;
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #f0f7ff;
+            color: #202124;
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-top: 70px;
         }
-        .sidebar a {
-            color: #1a3c66;
-            text-decoration: none;
-            display: block;
-            padding: 10px 20px;
-            transition: background 0.3s, color 0.3s;
+
+        /* 顶部导航栏 - 仅保留标题 */
+        .navbar {
+            background-color: #e6f0fa;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 12px 24px;
         }
-        .sidebar a:hover {
-            background: #a3c9ff;
-            color: #fff;
-        }
-        .sidebar a.active {
-            background: #2e5c99;
-            color: white;
-            font-weight: bold;
-        }
-        /* Main Content */
-        .content {
-            margin-left: 200px; /* Space for sidebar */
-            padding: 20px;
-            width: calc(100% - 200px);
-        }
-        header {
-            color: #333;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #a3c9ff; /* Subtle separation */
-            margin-bottom: 20px;
-        }
-        .container {
-            width: 90%;
+
+        .navbar-container {
             max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        h1, h2 {
-            color: #333;
-        }
-        section {
-            margin-bottom: 30px;
-            padding: 15px;
-            display: none; /* Hide sections initially */
-        }
-        section.active {
-            display: block; /* Show active section */
-        }
-        section a {
-            color: #1558d6; /* 悬停时颜色变为更深的蓝色 */
-            text-decoration: none; /* 移除默认下划线 */
-        }
-        section a:hover {
-            text-decoration: underline; /* 悬停时添加下划线 */
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-            vertical-align: top;
-        }
-        th {
-            background-color: #f2f2f2;
-            color: black;
-            font-weight: bold;
-        }
-        td a {
+
+        .navbar-logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #003366;
             text-decoration: none;
-            color: blue;
         }
-        td a:hover {
+
+        /* 移动端菜单按钮 */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #202124;
+        }
+
+        /* 主内容容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            background-color: #e6f0fa;
+            padding: 32px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+            border: 1px solid #cce0f5;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 16px;
+            color: #5f6368;
+        }
+
+        /* 内容区块 - 使用淡蓝色而非白色 */
+        .content-block {
+            background-color: #e6f0fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #cce0f5;
+        }
+
+        section {
+            margin-bottom: 32px;
+        }
+
+        section:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 标题样式 */
+        section h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #003366;
+            margin: 0 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cce0f5;
+        }
+
+        section h3 {
+            font-size: 19px;
+            font-weight: 600;
+            color: #202124;
+            margin: 24px 0 12px;
+        }
+
+        section p, section li {
+            font-size: 16px;
+            color: #3c4043;
+            margin-bottom: 12px;
+        }
+
+        section ul, section ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* 链接样式 */
+        a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: text-decoration 0.2s;
+        }
+
+        a:hover {
             text-decoration: underline;
+        }
+
+        /* 表格样式 */
+       .seminar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.seminar-table th,
+.seminar-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #cce0f5; /* 淡蓝色底边框 */
+    vertical-align: top;
+}
+
+.seminar-table th {
+    background-color: #d9e8f7;
+    font-weight: 600;
+    color: #003366;
+    border-top: 1px solid #cce0f5; /* 表头顶部淡蓝色边框 */
+}
+
+/* 移除单元格左右边框，只保留上下边框分隔 */
+.seminar-table th:first-child,
+.seminar-table td:first-child {
+    border-left: none;
+}
+
+.seminar-table th:last-child,
+.seminar-table td:last-child {
+    border-right: none;
+}
+
+.seminar-table tr:hover {
+    background-color: #d9e8f7;
+}
+
+        /* 即将举行的研讨会样式 */
+        .upcoming {
+            background-color: #d9e8f7;
+            border-left: 4px solid #0066cc;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 8px;
+            background-color: #d9e8f7;
+            color: #084298;
+            border: 1px solid #bfd7ff;
+        }
+
+        /* 页面切换 */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* 侧边栏导航 (桌面版) */
+        .sidebar {
+            width: 240px;
+            background-color: #e6f0fa;
+            border-right: 1px solid #cce0f5;
+            padding: 20px 0;
+            float: left;
+            height: calc(100vh - 70px);
+            position: sticky;
+            top: 70px;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            padding: 0 20px;
+            margin-bottom: 16px;
+            color: #003366;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 20px;
+            color: #3c4043;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: #d9e8f7;
+            color: #0066cc;
+        }
+
+        .sidebar a.active {
+            background-color: #d9e8f7;
+            color: #0066cc;
+            font-weight: 500;
+            border-left: 3px solid #0066cc;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            margin-left: 264px;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #0066cc;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            header {
+                padding: 24px 16px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .seminar-table {
+                font-size: 14px;
+                display: block;
+                overflow-x: auto;
+            }
+
+            .seminar-table th,
+            .seminar-table td {
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
+    <!-- 顶部导航栏 - 仅保留标题 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">Analysis & Geometry Seminar</a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <div class="sidebar">
+            <h3>Seminar Series</h3>
             <ul>
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#Spring2025">Spring 2025</a></li>
-                <li><a href="#Fall2024">Fall 2024</a></li>
-                <li><a href="#Fall2023">Fall 2023</a></li>
-                <li><a href="#Spring2023">Spring 2023</a></li>
-                <li><a href="#Fall2022">Fall 2022</a></li>
+                <li><a href="#" class="sidebar-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="sidebar-link" data-page="Fall2025">Fall 2025 <span class="tag">Current</span></a></li>
+                <li><a href="#" class="sidebar-link" data-page="Spring2025">Spring 2025</a></li>
+                <li><a href="#" class="sidebar-link" data-page="Fall2024">Fall 2024</a></li>
+                <li><a href="#" class="sidebar-link" data-page="Fall2023">Fall 2023</a></li>
+                <li><a href="#" class="sidebar-link" data-page="Spring2023">Spring 2023</a></li>
+                <li><a href="#" class="sidebar-link" data-page="Fall2022">Fall 2022</a></li>
             </ul>
-        </nav>
+        </div>
 
-        <!-- Main Content -->
-        <div class="content">
-            <header>
-                <h1>Seminars of Analysis and Geometric Measure Theory</h1>
-                <p>Welcome to the webpage of Analysis and GMT!</p>
-            </header>
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 首页 -->
+            <div id="home" class="page active">
+                <header>
+                    <h1>Seminars of Analysis and Geometric Measure Theory</h1>
+                    <p>Welcome to the webpage of Analysis and GMT!</p>
+                </header>
 
-            <div class="container">
-                <!-- Home Section -->
-                <section id="home" class="active">
-                    <h2>Home</h2>
-    <p>Welcome to the Seminars of Analysis and Geometric Measure Theory! This seminar series focuses on cutting-edge research in Partial Differential Equations (PDEs) and Geometric Measure Theory. </p>
-    <p>This seminar is organized by <a href="https://luisyanka.github.io/WeiWANGmath.github.io/">Wei Wang</a> and his colleagues at Peking University, bringing together researchers and students to explore seminal papers and recent advancements in these fields.</p>
-</section>
-                </section>
+                <div class="content-block">
+                    <section>
+                        <h2>Home</h2>
+                        <p>Welcome to the Seminars of Analysis and Geometric Measure Theory! This seminar series focuses on cutting-edge research in Partial Differential Equations (PDEs) and Geometric Measure Theory. </p>
+                        <p>This seminar is organized by <a href="https://luisyanka.github.io/WeiWANGmath.github.io/">Wei Wang</a> and his colleagues at Peking University, bringing together researchers and students to explore seminal papers and recent advancements in these fields.</p>
+                    </section>
+                </div>
+            </div>
 
-                <!-- Spring 2025 Section -->
-                <section id="Spring2025">
-                    <h2>Spring 2025</h2>   
-                    <p>In this seminar, we study some important papers in the research of geometric measure theory, analysis, PDEs, and the book "<a href="https://bookstore.ams.org/gsm-121/" rel="nofollow">A Course in Minimal Surfaces</a>" by Tobias Holck Colding and William P. Minicozzi (abbreviated as [CM11] in the following table). The reading seminar is held mostly every Thursday and Sunday afternoon, which starts from 14:00 at the Zhihua buildings of Peking University. Occasionally, due to the special schedules of the attendees, the time may change, and the seminar may be held online.</p>
-                    <h3>Attendees</h3>
-                    <p>Haotong Fu (Ph.D. candidate, PKU), Yuning Liu (Professor, NYU Shanghai), Huaijie Wang (Postdoctoral fellow, PKU), and Wei Wang (Ph.D. candidate, PKU).</p>
-                    <h3>Contents of the Seminar</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; vertical-align: middle;">Details of Contents</th>
-                                <th style="text-align: center; vertical-align: middle;">Time</th>
-                                <th style="text-align: center; vertical-align: middle;">Location</th>
-                                <th style="text-align: center; vertical-align: middle;">Lecturer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0294144916301779" rel="nofollow">[Pac94]</a> by Frank Pacard</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/2/20 <br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Quaternary Hall, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 1 of [CM11]: The Beginning of the Theory</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/2/23<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://www.ams.org/books/memo/0991/" rel="nofollow">[DS11]</a> by Camillo De Lellis, Emanuele Spadaro</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/2/27<br>14:00-17:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 2 of [CM11]: Curvature Estimates and Consequences</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/3/2<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://ems.press/journals/cmh/articles/15884" rel="nofollow">[LMSV11]</a> by Camillo De Lellis, Andrea Marchese, et al.</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/3/6<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 3 of [CM11]: Weak Convergence, Compactness and Applications</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/3/9<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://www.tandfonline.com/doi/full/10.1080/03605302.2013.856916" rel="nofollow">[Wan14]</a> by Kelei Wang</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/3/27<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 4 of [CM11]: Existence Results</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/3/30<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">A result about Willmore functional</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/4/1<br>14:00-17:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Yuning Liu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Some recent results for harmonic map flows</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/4/2<br>9:00-11:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 312, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://arxiv.org/abs/2411.16048" rel="nofollow">[WZ24]</a> by Wei Wang and Zhifei Zhang</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/4/3<br>14:00-17:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00039-014-0306-3" rel="nofollow">[LS14]</a> by Camillo De Lellis and Emanuele Spadaro</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/4/24<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://arxiv.org/abs/2406.05877" rel="nofollow">[HJ24]</a> by Yiqi Huang and Wenshuai Jiang</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/5/5<br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://www.jstor.org/stable/24735188?casa_token=5OBxAHVO53wAAAAA%3AFSYajSbR-zzrdWYHHgWyqthIOdPNEn0Hg0JDzUdve9UICIDM8eBAE79ENCvVw4pR8Ux2rpLPnADFWKyy3gzs9ej9PPx-pCJKZf52ijadJXueMS3glQ" rel="nofollow">[LS16]</a> by Camillo De Lellis and Emanuele Spadaro</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/5/8<br></td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://arxiv.org/abs/2406.05877" rel="nofollow">[HJ24]</a> by Yiqi Huang and Wenshuai Jiang</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/5/11<br></td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+            <!-- Fall 2025 Section -->
+            <div id="Fall2025" class="page">
+                <header>
+                    <h1>Fall 2025 Seminar</h1>
+                    <p>September - December 2025</p>
+                </header>
 
-                <!-- Fall 2024 Section -->
-                <section id="Fall2024">
-                    <h2>Fall 2024</h2>   
-                    <p>In this seminar, we mainly discuss the book "<a href="https://math.stanford.edu/~lms/ntu-gmt-text.pdf" rel="nofollow">Introduction to Geometric Measure Theory</a>" by L. Simon (abbreviated as [Sim14] in the following table). We also refer to the book "<a href="https://www.taylorfrancis.com/books/mono/10.1201/9780203747940/measure-theory-fine-properties-functions-lawrencecraig-evans" rel="nofollow">Measure Theory and Fine Properties of Functions</a>" for additional references. The reading seminar is held mostly every Thursday and Sunday afternoon from 14:00 to 16:00 at the Jiayibing or Zhihua buildings of Peking University. Occasionally, due to the special schedules of the attendees, the time may change, and the seminar may be held online.</p>
-                    <h3>Attendees</h3>
-                    <p>Haotong Fu (Ph.D. candidate, PKU), Huaijie Wang (Postdoctoral fellow, PKU), and Wei Wang (Ph.D. candidate, PKU).</p>
-                    <h3>Contents of the Seminar</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; vertical-align: middle;">Details of Contents</th>
-                                <th style="text-align: center; vertical-align: middle;">Time</th>
-                                <th style="text-align: center; vertical-align: middle;">Location</th>
-                                <th style="text-align: center; vertical-align: middle;">Lecturer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 1 & 2 of [Sim14]: Some Results for Measure Theory and Submanifolds</td>
-                                <td style="text-align: center; vertical-align: middle;">2024/12/15 <br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Underground Discussion Room <br>Jiayibing Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Sim14]: Rectifiable Sets</td>
-                                <td style="text-align: center; vertical-align: middle;">2024/12/22 <br>13:00-15:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Sim14]: Preliminary Results of BV Functions</td>
-                                <td style="text-align: center; vertical-align: middle;">2024/12/27 <br>15:00-17:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Sim14]: Reduced Boundaries of Sets with Finite Perimeters</td>
-                                <td style="text-align: center; vertical-align: middle;">2024/12/28 <br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 4 of [Sim14]: Theory of Rectifiable n-Varifolds</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/1/6 <br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 217, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 5 of [Sim14]: The Allard Regularity Theorem</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/1/12 <br>14:00-16:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 6 of [Sim14]: Theory of Currents</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/2/13 <br>14:00-17:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 7 of [Sim14]: Minimizing Currents</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/2/16 <br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                <div class="content-block">
+                    <section>
+                        <h2>Overview</h2>   
+                        <p>In this seminar, we mainly give reports on papers related to the stationary varifolds, Ginzburg-Landau typed functionals, and mean curvature flows.</p>
+                        <h2>Attendees</h2>
+                        <p>Haotong Fu (Ph.D. candidate, PKU), Huaijie Wang (Postdoctoral fellow, PKU), Wei Wang (Ph.D. candidate, PKU), and Zhifei Zhang (Professor, PKU).</p>
+                        <h2>Detailed Schedule</h2>
+                        <table class="seminar-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle;">Contents</th>
+                                    <th style="text-align: center; vertical-align: middle;">Time</th>
+                                    <th style="text-align: center; vertical-align: middle;">Location</th>
+                                    <th style="text-align: center; vertical-align: middle;">Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody>       
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00222-020-01000-6" rel="nofollow">[PS21]</a> by A. Pigati and D. Stern</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/9/6 <br>14:00-17:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                              </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
 
-                <!-- Fall 2023 Section -->
-                <section id="Fall2023">
-                    <h2>Fall 2023</h2>   
-                    <p>In this seminar, lecturers will share the papers they are currently reading on topics related to partial differential equations and geometric measure theory. This seminar is held mostly every Saturday evening from 18:30 to 20:30 in the 20th Building of Peking University.</p>
-                    <h3>Attendees</h3>
-                    <p>Haotong Fu (Ph.D. student, PKU), Wei Wang (Ph.D. candidate, PKU), and Qin Wu (Ph.D. candidate, PKU).</p>
-                    <h3>Contents of the Seminar</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; vertical-align: middle;">Details of Contents</th>
-                                <th style="text-align: center; vertical-align: middle;">Time</th>
-                                <th style="text-align: center; vertical-align: middle;">Location</th>
-                                <th style="text-align: center; vertical-align: middle;">Lecturer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00205-016-1040-9" rel="nofollow">[Can17]</a> by Giacomo Canevari</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/10/21 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00205-016-1040-9" rel="nofollow">[Can17]</a> by Giacomo Canevari</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/10/28 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://projecteuclid.org/journals/annals-of-mathematics/volume-197/issue-3/Stable-minimal-hypersurfaces-in-%E2%84%9DN1%E2%84%93-with-singular-set-an-arbitrary/10.4007/annals.2023.197.3.4.short" rel="nofollow">[Sim23]</a> by Leon Simon</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/11/11 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://projecteuclid.org/journals/annals-of-mathematics/volume-197/issue-3/Stable-minimal-hypersurfaces-in-%E2%84%9DN1%E2%84%93-with-singular-set-an-arbitrary/10.4007/annals.2023.197.3.4.short" rel="nofollow">[Sim23]</a> by Leon Simon</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/11/25 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00205-009-0249-2" rel="nofollow">[MZ09]</a> by Apala Majumdar and Arghir Zarnescu</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/12/2 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 107, 20th Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00526-012-0522-3" rel="nofollow">[NZ13]</a> by Luc Nguyen and Arghir Zarnescu</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/12/16 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 207, 20th Building</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+            <!-- Spring 2025 Section -->
+            <div id="Spring2025" class="page">
+                <header>
+                    <h1>Spring 2025 Seminar</h1>
+                    <p>February - June 2025</p>
+                </header>
 
-                <!-- Spring 2023 Section -->
-                <section id="Spring2023">
-                    <h2>Spring 2023</h2>   
-                    <p>In this seminar, we primarily study recent breakthroughs in harmonic maps surrounding the following two papers: </p>
-                    <ul>
-                        <li>"<a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/cpa.21446?casa_token=aAx6y6VI7J0AAAAA:4ZKyHNQvCZtgLhPHrSX3R-g3aWuZGdrn8zVbCQPhNkM-3xjublcPnKa6bE8U26adPJe-hyn1CGW6ob8" rel="nofollow">Quantitative Stratification and the Regularity of Harmonic Maps and Minimal Currents</a>" by Jeff Cheeger and Aaron Naber (abbreviated as [CN13])</li>
-                        <li>"<a href="https://projecteuclid.org/journals/annals-of-mathematics/volume-185/issue-1/Rectifiable-Reifenberg-and-the-regularity-of-stationary-and-minimizing-harmonic/10.4007/annals.2017.185.1.3.short" rel="nofollow">Rectifiable-Reifenberg and the Regularity of Stationary and Minimizing Harmonic Maps</a>" by Aaron Naber and Daniele Valtorta (abbreviated as [NV17])</li>
-                    </ul>
-                    <p>The reading seminar is held mostly every Friday evening from 18:40 to 20:40 in Science Building No. 2 of Peking University.</p>
-                    <h3>Attendees</h3>
-                    <p>Yuxuan Chen (Ph.D. student, PKU), Haotong Fu (Undergraduate student, PKU), Yuning Liu (Professor, NYU Shanghai), Wei Wang (Ph.D. student, PKU), and Zhifei Zhang (Professor, PKU).</p>
-                    <h3>Contents of the Seminar</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; vertical-align: middle;">Details of Contents</th>
-                                <th style="text-align: center; vertical-align: middle;">Time</th>
-                                <th style="text-align: center; vertical-align: middle;">Location</th>
-                                <th style="text-align: center; vertical-align: middle;">Lecturer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">[CN13]: The Quantitative Stratification</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/2/24 <br>18:40-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Classical Reifenberg Theorem</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/3/17 <br>18:40-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 3-6 of [NV17]: Rectifiable Reifenberg Results I</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/3/23 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Learning Report on [CN13] and [NV17]</td>
-                                <td style="text-align: center; vertical-align: middle;">2024/4/1 <br>14:00-17:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 1560 <br>Science Building No. 1</td>
-                                <td style="text-align: center; vertical-align: middle;">Yuxuan Chen <br> Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Learning report about [CN13] and [NV17]</td>
-                                <td style="text-align: center; vertical-align: middle;">2025/4/2<br>18:40-20:40</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang <br>Haotong Fu</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 3-6 of [NV17]: Rectifiable Reifenberg Results II</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/4/7 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 7-11 of [NV17]: Proof of Main Results</td>
-                                <td style="text-align: center; vertical-align: middle;">2023/4/21 <br>18:40-20:40</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                <div class="content-block">
+                    <section>
+                        <h2>Overview</h2>   
+                        <p>In this seminar, we study some important papers in the research of geometric measure theory, analysis, PDEs, and the book "<a href="https://bookstore.ams.org/gsm-121/" rel="nofollow">A Course in Minimal Surfaces</a>" by Tobias Holck Colding and William P. Minicozzi (abbreviated as [CM11] in the following table). The reading seminar is held mostly every Thursday and Sunday afternoon, which starts from 14:00 at the Zhihua buildings of Peking University. Occasionally, due to the special schedules of the attendees, the time may change, and the seminar may be held online.</p>
+                        <h2>Attendees</h2>
+                        <p>Haotong Fu (Ph.D. candidate, PKU), Yuning Liu (Professor, NYU Shanghai), Huaijie Wang (Postdoctoral fellow, PKU), and Wei Wang (Ph.D. candidate, PKU).</p>
+                        <h2>Detailed Schedule</h2>
+                        <table class="seminar-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle;">Contents</th>
+                                    <th style="text-align: center; vertical-align: middle;">Time</th>
+                                    <th style="text-align: center; vertical-align: middle;">Location</th>
+                                    <th style="text-align: center; vertical-align: middle;">Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0294144916301779" rel="nofollow">[Pac94]</a> by Frank Pacard</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/2/20 <br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Quaternary Hall, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 1 of [CM11]: The Beginning of the Theory</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/2/23<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://www.ams.org/books/memo/0991/" rel="nofollow">[DS11]</a> by Camillo De Lellis, Emanuele Spadaro</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/2/27<br>14:00-17:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 2 of [CM11]: Curvature Estimates and Consequences</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/3/2<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://ems.press/journals/cmh/articles/15884" rel="nofollow">[LMSV11]</a> by Camillo De Lellis, Andrea Marchese, et al.</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/3/6<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 3 of [CM11]: Weak Convergence, Compactness and Applications</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/3/9<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://www.tandfonline.com/doi/full/10.1080/03605302.2013.856916" rel="nofollow">[Wan14]</a> by Kelei Wang</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/3/27<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 4 of [CM11]: Existence Results</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/3/30<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">A result about Willmore functional</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/4/1<br>14:00-17:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Yuning Liu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Some recent results for harmonic map flows</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/4/2<br>9:00-11:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 312, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://arxiv.org/abs/2411.16048" rel="nofollow">[WZ24]</a> by Wei Wang and Zhifei Zhang</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/4/3<br>14:00-17:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00039-014-0306-3" rel="nofollow">[LS14]</a> by Camillo De Lellis and Emanuele Spadaro</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/4/24<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://arxiv.org/abs/2406.05877" rel="nofollow">[HJ24]</a> by Yiqi Huang and Wenshuai Jiang</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/5/5<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://www.jstor.org/stable/24735188?casa_token=5OBxAHVO53wAAAAA%3AFSYajSbR-zzrdWYHHgWyqthIOdPNEn0Hg0JDzUdve9UICIDM8eBAE79ENCvVw4pR8Ux2rpLPnADFWKyy3gzs9ej9PPx-pCJKZf52ijadJXueMS3glQ" rel="nofollow">[LS16]</a> by Camillo De Lellis and Emanuele Spadaro</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/5/8<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://arxiv.org/abs/2406.05877" rel="nofollow">[HJ24]</a> by Yiqi Huang and Wenshuai Jiang</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/5/11<br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
 
-                <!-- Fall 2022 Section -->
-                <section id="Fall2022">
-                    <h2>Fall 2022</h2>   
-                    <p>In this seminar, we study the lecture note "<a href="https://academic.hep.com.cn/fcc/CN/chapter/978-7-04-044200-7-00/chapter04" rel="nofollow">Lectures on Elliptic Free Boundary Problems</a>" by Fanghua Lin (abbreviated as [Lin15]). The reading seminar is held mostly every Saturday evening from 18:30 to 20:30 at Science Building No. 2 of Peking University.</p>
-                    <h3>Attendees</h3>
-                    <p>Yuxuan Chen (Ph.D. student, PKU), Haotong Fu (Undergraduate student, PKU), Feng Shao (Ph.D. candidate, PKU), Wei Wang (Ph.D. student, PKU), and Wenzhi Wu (Ph.D. student, PKU).</p>
-                    <h3>Contents of the Seminar</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="text-align: center; vertical-align: middle;">Details of Contents</th>
-                                <th style="text-align: center; vertical-align: middle;">Time</th>
-                                <th style="text-align: center; vertical-align: middle;">Location</th>
-                                <th style="text-align: center; vertical-align: middle;">Lecturer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 2 of [Lin15]: General Theory of Existence and Uniqueness</td>
-                                <td style="text-align: center; vertical-align: middle;">2022/9/17 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Lin15]: Regularity of Solutions</td>
-                                <td style="text-align: center; vertical-align: middle;">2022/9/24 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 4 of [Lin15]: Regularity of Free Boundary I</td>
-                                <td style="text-align: center; vertical-align: middle;">2022/10/1 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 4 of [Lin15]: Regularity of Free Boundary II</td>
-                                <td style="text-align: center; vertical-align: middle;">2022/10/8 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 5 of [Lin15]: Regularity of Singular Sets of Free Boundary I</td>
-                                <td style="text-align: center; vertical-align: middle;">2022/10/15 <br>18:30-20:30</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 5 of [Lin15]: Regularity of Singular Sets of Free Boundary II</td>
-                                <td style="text-align: center; vertical-align: middle;">2022/10/22 <br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; vertical-align: middle;">Ch. 6 of [Lin15]: Higher Regularity of Free Boundary</td>
-                                <td style="text-align: center; vertical-align: middle;">2022/10/29 <br>14:00-16:00</td>
-                                <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
-                                <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+            <!-- Fall 2024 Section -->
+            <div id="Fall2024" class="page">
+                <header>
+                    <h1>Fall 2024 Seminar</h1>
+                    <p>September - December 2024</p>
+                </header>
+
+                <div class="content-block">
+                    <section>
+                        <h2>Overview</h2>   
+                        <p>In this seminar, we mainly discuss the book "<a href="https://math.stanford.edu/~lms/ntu-gmt-text.pdf" rel="nofollow">Introduction to Geometric Measure Theory</a>" by L. Simon (abbreviated as [Sim14] in the following table). We also refer to the book "<a href="https://www.taylorfrancis.com/books/mono/10.1201/9780203747940/measure-theory-fine-properties-functions-lawrencecraig-evans" rel="nofollow">Measure Theory and Fine Properties of Functions</a>" for additional references. The reading seminar is held mostly every Thursday and Sunday afternoon from 14:00 to 16:00 at the Jiayibing or Zhihua buildings of Peking University. Occasionally, due to the special schedules of the attendees, the time may change, and the seminar may be held online.</p>
+                        <h2>Attendees</h2>
+                        <p>Haotong Fu (Ph.D. candidate, PKU), Huaijie Wang (Postdoctoral fellow, PKU), and Wei Wang (Ph.D. candidate, PKU).</p>
+                        <h2>Detailed Schedule</h2>
+                        <table class="seminar-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle;">Contents</th>
+                                    <th style="text-align: center; vertical-align: middle;">Time</th>
+                                    <th style="text-align: center; vertical-align: middle;">Location</th>
+                                    <th style="text-align: center; vertical-align: middle;">Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 1 & 2 of [Sim14]: Some Results for Measure Theory and Submanifolds</td>
+                                    <td style="text-align: center; vertical-align: middle;">2024/12/15 <br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Underground Discussion Room <br>Jiayibing Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Sim14]: Rectifiable Sets</td>
+                                    <td style="text-align: center; vertical-align: middle;">2024/12/22 <br>13:00-15:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Sim14]: Preliminary Results of BV Functions</td>
+                                    <td style="text-align: center; vertical-align: middle;">2024/12/27 <br>15:00-17:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Sim14]: Reduced Boundaries of Sets with Finite Perimeters</td>
+                                    <td style="text-align: center; vertical-align: middle;">2024/12/28 <br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 4 of [Sim14]: Theory of Rectifiable n-Varifolds</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/1/6 <br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 217, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Huaijie Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 5 of [Sim14]: The Allard Regularity Theorem</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/1/12 <br>14:00-16:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 6 of [Sim14]: Theory of Currents</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/2/13 <br>14:00-17:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 7 of [Sim14]: Minimizing Currents</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/2/16 <br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 313, Zhihua Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Fall 2023 Section -->
+            <div id="Fall2023" class="page">
+                <header>
+                    <h1>Fall 2023 Seminar</h1>
+                    <p>September - December 2023</p>
+                </header>
+
+                <div class="content-block">
+                    <section>
+                        <h2>Overview</h2>   
+                        <p>In this seminar, Speakers will share the papers they are currently reading on topics related to partial differential equations and geometric measure theory. This seminar is held mostly every Saturday evening from 18:30 to 20:30 in the 20th Building of Peking University.</p>
+                        <h2>Attendees</h2>
+                        <p>Haotong Fu (Ph.D. student, PKU), Wei Wang (Ph.D. candidate, PKU), and Qin Wu (Ph.D. candidate, PKU).</p>
+                        <h2>Detailed Schedule</h2>
+                        <table class="seminar-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle;">Contents</th>
+                                    <th style="text-align: center; vertical-align: middle;">Time</th>
+                                    <th style="text-align: center; vertical-align: middle;">Location</th>
+                                    <th style="text-align: center; vertical-align: middle;">Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00205-016-1040-9" rel="nofollow">[Can17]</a> by Giacomo Canevari</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/10/21 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00205-016-1040-9" rel="nofollow">[Can17]</a> by Giacomo Canevari</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/10/28 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://projecteuclid.org/journals/annals-of-mathematics/volume-197/issue-3/Stable-minimal-hypersurfaces-in-%E2%84%9DN1%E2%84%93-with-singular-set-an-arbitrary/10.4007/annals.2023.197.3.4.short" rel="nofollow">[Sim23]</a> by Leon Simon</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/11/11 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://projecteuclid.org/journals/annals-of-mathematics/volume-197/issue-3/Stable-minimal-hypersurfaces-in-%E2%84%9DN1%E2%84%93-with-singular-set-an-arbitrary/10.4007/annals.2023.197.3.4.short" rel="nofollow">[Sim23]</a> by Leon Simon</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/11/25 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 307, 20th Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00205-009-0249-2" rel="nofollow">[MZ09]</a> by Apala Majumdar and Arghir Zarnescu</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/12/2 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 107, 20th Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="https://link.springer.com/article/10.1007/s00526-012-0522-3" rel="nofollow">[NZ13]</a> by Luc Nguyen and Arghir Zarnescu</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/12/16 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 207, 20th Building</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Spring 2023 Section -->
+            <div id="Spring2023" class="page">
+                <header>
+                    <h1>Spring 2023 Seminar</h1>
+                    <p>February - June 2023</p>
+                </header>
+
+                <div class="content-block">
+                    <section>
+                        <h2>Overview</h2>   
+                        <p>In this seminar, we primarily study recent breakthroughs in harmonic maps surrounding the following two papers: </p>
+                        <ul>
+                            <li>"<a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/cpa.21446?casa_token=aAx6y6VI7J0AAAAA:4ZKyHNQvCZtgLhPHrSX3R-g3aWuZGdrn8zVbCQPhNkM-3xjublcPnKa6bE8U26adPJe-hyn1CGW6ob8" rel="nofollow">Quantitative Stratification and the Regularity of Harmonic Maps and Minimal Currents</a>" by Jeff Cheeger and Aaron Naber (abbreviated as [CN13])</li>
+                            <li>"<a href="https://projecteuclid.org/journals/annals-of-mathematics/volume-185/issue-1/Rectifiable-Reifenberg-and-the-regularity-of-stationary-and-minimizing-harmonic/10.4007/annals.2017.185.1.3.short" rel="nofollow">Rectifiable-Reifenberg and the Regularity of Stationary and Minimizing Harmonic Maps</a>" by Aaron Naber and Daniele Valtorta (abbreviated as [NV17])</li>
+                        </ul>
+                        <p>The reading seminar is held mostly every Friday evening from 18:40 to 20:40 in Science Building No. 2 of Peking University.</p>
+                        <h2>Attendees</h2>
+                        <p>Yuxuan Chen (Ph.D. student, PKU), Haotong Fu (Undergraduate student, PKU), Yuning Liu (Professor, NYU Shanghai), Wei Wang (Ph.D. student, PKU), and Zhifei Zhang (Professor, PKU).</p>
+                        <h2>Detailed Schedule</h2>
+                        <table class="seminar-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle;">Contents</th>
+                                    <th style="text-align: center; vertical-align: middle;">Time</th>
+                                    <th style="text-align: center; vertical-align: middle;">Location</th>
+                                    <th style="text-align: center; vertical-align: middle;">Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">[CN13]: The Quantitative Stratification</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/2/24 <br>18:40-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Classical Reifenberg Theorem</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/3/17 <br>18:40-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 3-6 of [NV17]: Rectifiable Reifenberg Results I</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/3/23 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Learning Report on [CN13] and [NV17]</td>
+                                    <td style="text-align: center; vertical-align: middle;">2024/4/1 <br>14:00-17:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 1560 <br>Science Building No. 1</td>
+                                    <td style="text-align: center; vertical-align: middle;">Yuxuan Chen <br> Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Learning report about [CN13] and [NV17]</td>
+                                    <td style="text-align: center; vertical-align: middle;">2025/4/2<br>18:40-20:40</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang <br>Haotong Fu</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 3-6 of [NV17]: Rectifiable Reifenberg Results II</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/4/7 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 7-11 of [NV17]: Proof of Main Results</td>
+                                    <td style="text-align: center; vertical-align: middle;">2023/4/21 <br>18:40-20:40</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Fall 2022 Section -->
+            <div id="Fall2022" class="page">
+                <header>
+                    <h1>Fall 2022 Seminar</h1>
+                    <p>September - December 2022</p>
+                </header>
+
+                <div class="content-block">
+                    <section>
+                        <h2>Overview</h2>   
+                        <p>In this seminar, we study the lecture note "<a href="https://academic.hep.com.cn/fcc/CN/chapter/978-7-04-044200-7-00/chapter04" rel="nofollow">Lectures on Elliptic Free Boundary Problems</a>" by Fanghua Lin (abbreviated as [Lin15]). The reading seminar is held mostly every Saturday evening from 18:30 to 20:30 at Science Building No. 2 of Peking University.</p>
+                        <h2>Attendees</h2>
+                        <p>Yuxuan Chen (Ph.D. student, PKU), Haotong Fu (Undergraduate student, PKU), Feng Shao (Ph.D. candidate, PKU), Wei Wang (Ph.D. student, PKU), and Wenzhi Wu (Ph.D. student, PKU).</p>
+                        <h2>Detailed Schedule</h2>
+                        <table class="seminar-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle;">Contents</th>
+                                    <th style="text-align: center; vertical-align: middle;">Time</th>
+                                    <th style="text-align: center; vertical-align: middle;">Location</th>
+                                    <th style="text-align: center; vertical-align: middle;">Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 2 of [Lin15]: General Theory of Existence and Uniqueness</td>
+                                    <td style="text-align: center; vertical-align: middle;">2022/9/17 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 3 of [Lin15]: Regularity of Solutions</td>
+                                    <td style="text-align: center; vertical-align: middle;">2022/9/24 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 4 of [Lin15]: Regularity of Free Boundary I</td>
+                                    <td style="text-align: center; vertical-align: middle;">2022/10/1 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 4 of [Lin15]: Regularity of Free Boundary II</td>
+                                    <td style="text-align: center; vertical-align: middle;">2022/10/8 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Yuxuan Chen</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 5 of [Lin15]: Regularity of Singular Sets of Free Boundary I</td>
+                                    <td style="text-align: center; vertical-align: middle;">2022/10/15 <br>18:30-20:30</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 5 of [Lin15]: Regularity of Singular Sets of Free Boundary II</td>
+                                    <td style="text-align: center; vertical-align: middle;">2022/10/22 <br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">Ch. 6 of [Lin15]: Higher Regularity of Free Boundary</td>
+                                    <td style="text-align: center; vertical-align: middle;">2022/10/29 <br>14:00-16:00</td>
+                                    <td style="text-align: center; vertical-align: middle;">Room 2517 <br>Science Building No. 2</td>
+                                    <td style="text-align: center; vertical-align: middle;">Wei Wang</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fa fa-arrow-up"></i>
+    </div>
+
     <script>
-        // Smooth scrolling and section display
-        document.querySelectorAll('.sidebar a').forEach(link => {
-            link.addEventListener('click', (e) => {
+        document.addEventListener('DOMContentLoaded', function() {
+            // 页面元素
+            const navLinks = document.querySelectorAll('.sidebar-link');
+            const pages = document.querySelectorAll('.page');
+            const menuToggle = document.getElementById('menuToggle');
+            const backToTop = document.getElementById('backToTop');
+
+            // 导航切换逻辑
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // 移除所有导航高亮
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    // 高亮当前导航
+                    this.classList.add('active');
+
+                    // 切换页面
+                    const targetPageId = this.getAttribute('data-page');
+                    pages.forEach(page => page.classList.remove('active'));
+                    document.getElementById(targetPageId).classList.add('active');
+
+                    // 滚动到顶部
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // 移动端菜单切换 - 点击菜单按钮显示侧边栏导航
+            menuToggle.addEventListener('click', function() {
+                const sidebar = document.querySelector('.sidebar');
+                if (window.innerWidth <= 768) {
+                    sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+                    sidebar.style.position = 'fixed';
+                    sidebar.style.width = '80%';
+                    sidebar.style.zIndex = '1000';
+                }
+            });
+
+            // 返回顶部按钮逻辑
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+
+            backToTop.addEventListener('click', function(e) {
                 e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
-                // Hide all sections
-                document.querySelectorAll('section').forEach(section => {
-                    section.classList.remove('active');
-                });
-
-                // Show target section
-                targetSection.classList.add('active');
-
-                // Update active link
-                document.querySelectorAll('.sidebar a').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-
-                // Smooth scroll to section
-                window.scrollTo({
-                    top: targetSection.offsetTop - 100, // Adjust for header
-                    behavior: 'smooth'
-                });
+            // 窗口大小变化时处理侧边栏显示
+            window.addEventListener('resize', function() {
+                const sidebar = document.querySelector('.sidebar');
+                if (window.innerWidth > 768) {
+                    sidebar.style.display = 'block';
+                    sidebar.style.position = 'sticky';
+                    sidebar.style.width = '240px';
+                } else {
+                    sidebar.style.display = 'none';
+                }
             });
         });
     </script>
