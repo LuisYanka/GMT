@@ -7,53 +7,89 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #165DFF;
+            --secondary: #4080FF;
+            --light: #E8F3FF;
+            --dark-blue: #0E42D2;
+            --neutral: #F0F7FF;
+            --bg: #ffffff;
+            --card: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --border: #e5e7eb;
+            --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            background-color: #f0f7ff;
-            color: #202124;
-            min-height: 100vh;
-            line-height: 1.6;
-            padding-top: 70px;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* 顶部导航栏 - 仅保留标题 */
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-top: 64px;
+        }
+
+        /* 顶部导航栏：去掉多余空位，采用个人主页的蓝白配色 */
         .navbar {
-            background-color: #e6f0fa;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            box-shadow: none;
+            border-bottom: 1px solid var(--border);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
-            padding: 12px 24px;
+            padding: 0 24px;
         }
 
         .navbar-container {
             max-width: 1200px;
+            height: 64px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
         }
 
         .navbar-logo {
             font-size: 18px;
-            font-weight: 600;
-            color: #003366;
+            font-weight: 700;
+            color: var(--primary);
             text-decoration: none;
+            white-space: nowrap;
         }
 
-        /* 移动端菜单按钮 */
         .menu-toggle {
             display: none;
-            font-size: 24px;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border);
+            background-color: var(--card);
+            color: var(--text-muted);
+            padding: 7px 10px;
+            border-radius: 999px;
             cursor: pointer;
-            color: #202124;
+            font: inherit;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .menu-toggle:hover {
+            color: var(--primary);
+            border-color: rgba(22, 93, 255, 0.35);
+            background-color: var(--light);
         }
 
         /* 主内容容器 */
@@ -61,38 +97,42 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
         }
 
         header {
-            background-color: #e6f0fa;
-            padding: 32px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: linear-gradient(135deg, rgba(232, 243, 255, 0.78), rgba(255, 255, 255, 0.98));
+            padding: 36px 24px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
             margin-bottom: 24px;
-            border: 1px solid #cce0f5;
+            border: 1px solid var(--border);
             text-align: center;
         }
 
         header h1 {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 700;
-            color: #003366;
+            color: #111827;
             margin-bottom: 8px;
+            line-height: 1.25;
         }
 
         header p {
             font-size: 16px;
-            color: #5f6368;
+            color: var(--text-muted);
         }
 
-        /* 内容区块 - 使用淡蓝色而非白色 */
+        /* 内容区块 */
         .content-block {
-            background-color: #e6f0fa;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            padding: 24px;
+            background-color: var(--card);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            padding: 26px;
             margin-bottom: 24px;
-            border: 1px solid #cce0f5;
+            border: 1px solid var(--border);
         }
 
         section {
@@ -103,26 +143,25 @@
             margin-bottom: 0;
         }
 
-        /* 标题样式 */
         section h2 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #003366;
-            margin: 0 0 16px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin: 0 0 18px;
             padding-bottom: 8px;
-            border-bottom: 2px solid #cce0f5;
+            border-bottom: 1px solid var(--border);
         }
 
         section h3 {
             font-size: 19px;
             font-weight: 600;
-            color: #202124;
+            color: #111827;
             margin: 24px 0 12px;
         }
 
         section p, section li {
             font-size: 16px;
-            color: #3c4043;
+            color: var(--text-main);
             margin-bottom: 12px;
         }
 
@@ -131,102 +170,105 @@
             margin-bottom: 16px;
         }
 
-        /* 链接样式 */
         a {
-            color: #0066cc;
+            color: var(--primary);
             text-decoration: none;
-            transition: text-decoration 0.2s;
+            transition: color 0.2s, text-decoration 0.2s;
         }
 
         a:hover {
+            color: var(--dark-blue);
             text-decoration: underline;
         }
 
-        /* 表格样式 */
-       .seminar-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
+        .seminar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
 
-.seminar-table th,
-.seminar-table td {
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid #cce0f5; /* 淡蓝色底边框 */
-    vertical-align: top;
-}
+        .seminar-table th,
+        .seminar-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
 
-.seminar-table th {
-    background-color: #d9e8f7;
-    font-weight: 600;
-    color: #003366;
-    border-top: 1px solid #cce0f5; /* 表头顶部淡蓝色边框 */
-}
+        .seminar-table th {
+            background-color: var(--neutral);
+            font-weight: 600;
+            color: var(--text-main);
+        }
 
-/* 移除单元格左右边框，只保留上下边框分隔 */
-.seminar-table th:first-child,
-.seminar-table td:first-child {
-    border-left: none;
-}
+        .seminar-table tr:last-child td {
+            border-bottom: none;
+        }
 
-.seminar-table th:last-child,
-.seminar-table td:last-child {
-    border-right: none;
-}
+        .seminar-table tr:hover {
+            background-color: rgba(232, 243, 255, 0.55);
+        }
 
-.seminar-table tr:hover {
-    background-color: #d9e8f7;
-}
-
-        /* 即将举行的研讨会样式 */
         .upcoming {
-            background-color: #d9e8f7;
-            border-left: 4px solid #0066cc;
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
             padding: 16px;
             margin: 20px 0;
-            border-radius: 0 4px 4px 0;
+            border-radius: 0 8px 8px 0;
         }
 
-        /* 标签样式 */
         .tag {
             display: inline-block;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            margin-left: 8px;
-            background-color: #d9e8f7;
-            color: #084298;
-            border: 1px solid #bfd7ff;
+            padding: 2px 7px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 6px;
+            background-color: var(--light);
+            color: var(--primary);
+            border: 1px solid rgba(22, 93, 255, 0.18);
+            vertical-align: middle;
         }
 
-        /* 页面切换 */
         .page {
             display: none;
         }
 
         .page.active {
             display: block;
+            animation: pageFadeIn 0.3s ease-out;
         }
 
-        /* 侧边栏导航 (桌面版) */
+        @keyframes pageFadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 侧边栏导航 */
         .sidebar {
             width: 240px;
-            background-color: #e6f0fa;
-            border-right: 1px solid #cce0f5;
-            padding: 20px 0;
-            float: left;
-            height: calc(100vh - 70px);
+            flex: 0 0 240px;
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 0;
+            height: calc(100vh - 112px);
             position: sticky;
-            top: 70px;
+            top: 88px;
             overflow-y: auto;
+            box-shadow: var(--shadow);
         }
 
         .sidebar h3 {
             padding: 0 20px;
-            margin-bottom: 16px;
-            color: #003366;
+            margin-bottom: 12px;
+            color: #111827;
+            font-size: 16px;
+            font-weight: 700;
         }
 
         .sidebar ul {
@@ -240,28 +282,50 @@
         }
 
         .sidebar a {
-            display: block;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
             padding: 10px 20px;
-            color: #3c4043;
+            color: var(--text-muted);
             text-decoration: none;
             transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 3px;
+            border-radius: 0 3px 3px 0;
+            background-color: transparent;
+            transition: background-color 0.2s;
         }
 
         .sidebar a:hover {
-            background-color: #d9e8f7;
-            color: #0066cc;
+            background-color: var(--light);
+            color: var(--primary);
         }
 
         .sidebar a.active {
-            background-color: #d9e8f7;
-            color: #0066cc;
-            font-weight: 500;
-            border-left: 3px solid #0066cc;
+            background-color: var(--light);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .sidebar a.active::before {
+            background-color: var(--primary);
         }
 
         /* 主内容区 */
         .main-content {
-            margin-left: 264px;
+            flex: 1;
+            min-width: 0;
         }
 
         /* 返回顶部按钮 */
@@ -269,19 +333,24 @@
             position: fixed;
             bottom: 24px;
             right: 24px;
-            background-color: #0066cc;
+            background-color: var(--primary);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 18px rgba(22, 93, 255, 0.26);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, transform 0.2s;
             pointer-events: none;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            background-color: var(--dark-blue);
         }
 
         .back-to-top.active {
@@ -291,34 +360,65 @@
 
         /* 移动端适配 */
         @media (max-width: 768px) {
+            body {
+                padding-top: 64px;
+            }
+
+            .navbar {
+                padding: 0 16px;
+            }
+
+            .navbar-logo {
+                font-size: 16px;
+            }
+
             .menu-toggle {
+                display: inline-flex;
+            }
+
+            .container {
                 display: block;
+                padding: 16px;
             }
 
             .sidebar {
                 display: none;
+                position: fixed;
+                top: 76px;
+                left: 16px;
+                right: 16px;
+                width: auto;
+                height: auto;
+                max-height: calc(100vh - 96px);
+                z-index: 1000;
+                border-radius: 14px;
+            }
+
+            .sidebar.open {
+                display: block;
             }
 
             .main-content {
                 margin-left: 0;
             }
 
-            .container {
-                padding: 16px;
-            }
-
             header {
-                padding: 24px 16px;
+                padding: 28px 16px;
             }
 
             header h1 {
                 font-size: 24px;
             }
 
+            .content-block {
+                padding: 18px;
+            }
+
             .seminar-table {
                 font-size: 14px;
                 display: block;
                 overflow-x: auto;
+                border-radius: 10px;
             }
 
             .seminar-table th,
@@ -333,9 +433,10 @@
     <nav class="navbar">
         <div class="navbar-container">
             <a href="#" class="navbar-logo">Analysis & Geometry Seminar</a>
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fa fa-bars"></i>
-            </div>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open seminar menu">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+                <span class="menu-toggle-text">Menu</span>
+            </button>
         </div>
     </nav>
 
@@ -346,7 +447,7 @@
             <ul>
                 <li><a href="#" class="sidebar-link active" data-page="home">Home</a></li>
                 <li><a href="#" class="sidebar-link" data-page="Spring2026">Spring 2026 <span class="tag">Current</span></a></li>
-                <li><a href="#" class="sidebar-link" data-page="Fall2025">Fall 2025 </li>
+                <li><a href="#" class="sidebar-link" data-page="Fall2025">Fall 2025</a></li>
                 <li><a href="#" class="sidebar-link" data-page="Spring2025">Spring 2025</a></li>
                 <li><a href="#" class="sidebar-link" data-page="Fall2024">Fall 2024</a></li>
                 <li><a href="#" class="sidebar-link" data-page="Fall2023">Fall 2023</a></li>
@@ -957,19 +1058,19 @@
                     pages.forEach(page => page.classList.remove('active'));
                     document.getElementById(targetPageId).classList.add('active');
 
+                    // 移动端点击菜单项后自动收起侧边栏
+                    document.querySelector('.sidebar').classList.remove('open');
+
                     // 滚动到顶部
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             });
 
-            // 移动端菜单切换 - 点击菜单按钮显示侧边栏导航
+            // 移动端菜单切换
             menuToggle.addEventListener('click', function() {
                 const sidebar = document.querySelector('.sidebar');
                 if (window.innerWidth <= 768) {
-                    sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
-                    sidebar.style.position = 'fixed';
-                    sidebar.style.width = '80%';
-                    sidebar.style.zIndex = '1000';
+                    sidebar.classList.toggle('open');
                 }
             });
 
@@ -987,15 +1088,11 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // 窗口大小变化时处理侧边栏显示
+            // 窗口大小变化时清理移动端展开状态
             window.addEventListener('resize', function() {
                 const sidebar = document.querySelector('.sidebar');
                 if (window.innerWidth > 768) {
-                    sidebar.style.display = 'block';
-                    sidebar.style.position = 'sticky';
-                    sidebar.style.width = '240px';
-                } else {
-                    sidebar.style.display = 'none';
+                    sidebar.classList.remove('open');
                 }
             });
         });
